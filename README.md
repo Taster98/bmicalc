@@ -4,5 +4,4 @@ This is a very simple Android app which has the purpose to learn developing app.
 
 ## How to install it
 To install you should find the .apk file into the app folder, named "bmicalc-debug.apk", which can be installed on your device by enabling "Install from unknown sources" on it.
-![Screenshots of App #1](screen2.jpg "Screenshots of App #1") ![Screenshots of App #2](screen1.jpg "Screenshots of App #2")
-
+<img src="screen2.jpg" width="49%" alt="Screenshots of App #1"> <img src="screen1.jpg" width="49%" alt="Screenshots of App #2">
