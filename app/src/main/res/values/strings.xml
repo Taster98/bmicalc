@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">BMICalcTest</string>
+    <string name="hello_world">Ciao Mondo</string>
+    <string name="inserisci_altezza">Inserisci la tua altezza in cm:</string>
+    <string name="inserisci_peso">Inserisci il tuo peso in kg:</string>
+    <string name="calcola">Calcola BMI</string>
+</resources>
