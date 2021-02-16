@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -27,9 +28,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         //inizializzare tutto il layout
         initView();
+        //RIPRISTINO I MIEI DATI
+        readData();
         //logica per il calcolo del BMI
         process();
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        writeData();
+    }
+
     @Override
     public void onClick(View v) {
         action();
@@ -76,8 +86,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 resultTextView.setText(String.format("%2.1f", bmi));
 
             }catch(Exception e){
-                resultTextView.setText("???");
-                Toast.makeText(this, "Attenzione, dati non validi",Toast.LENGTH_LONG).show();
+                resultTextView.setText(Constants.DFT_MSG);
+                Toast.makeText(this, Constants.ERR_MSG,Toast.LENGTH_LONG).show();
             }
         }
         closeKeyboard();
@@ -88,5 +98,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         //Il metodo nativo per nascondere la tastiera
         imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+    }
+
+    private void writeData(){
+        //Salviamo questi dati ad esempio come "preferenze"
+        SharedPreferences sharedPreferences = getSharedPreferences(Constants.PREF_NAME,MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(Constants.PREF_VAL,resultTextView.getText().toString());
+        editor.apply();
+    }
+    private void readData(){
+        SharedPreferences sharedPreferences = getSharedPreferences(Constants.PREF_NAME, MODE_PRIVATE);
+        resultTextView.setText(sharedPreferences.getString(Constants.PREF_VAL,""));
     }
 }
